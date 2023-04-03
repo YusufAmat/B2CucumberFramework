@@ -1,2 +1,4 @@
-package stepdefs;public class Hooks {
+package stepdefs;
+
+public class Hooks {
 }
