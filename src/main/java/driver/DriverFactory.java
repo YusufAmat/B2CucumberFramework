@@ -11,7 +11,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import readers.property.PropertyReader;
@@ -21,7 +20,8 @@ public class DriverFactory {
     public static WebDriver createChrome(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
+
         for (String s : pr.get("chrome.options").split(",")) {
             options.addArguments(s.trim());
         }
@@ -31,7 +31,7 @@ public class DriverFactory {
     public static WebDriver createEdge(){
         WebDriverManager.edgedriver().setup();
         EdgeOptions options = new EdgeOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
         for (String s : pr.get("edge.options").split(",")) {
             options.addArguments(s.trim());
         }
@@ -41,7 +41,7 @@ public class DriverFactory {
     public static WebDriver createFirefox(){
         WebDriverManager.firefoxdriver().setup();
         FirefoxOptions options = new FirefoxOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
         for (String s : pr.get("firefox.options").split(",")) {
             options.addArguments(s.trim());
         }
@@ -53,7 +53,7 @@ public class DriverFactory {
             throw new WebDriverException("Your OS doesn't support Internet Explorer");
         WebDriverManager.iedriver().setup();
         InternetExplorerOptions options = new InternetExplorerOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
         return new InternetExplorerDriver(options);
     }
 
@@ -62,7 +62,7 @@ public class DriverFactory {
             throw new WebDriverException("Your OS doesn't support Safari");
         WebDriverManager.safaridriver().setup();
         SafariOptions options = new SafariOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
         options.setCapability("safari.cleanSession", true);
         options.setAutomaticInspection(true);
         options.getUseTechnologyPreview();
