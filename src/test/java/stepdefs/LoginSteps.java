@@ -52,5 +52,6 @@ public class LoginSteps extends BaseSteps{
     @Then("login should be successfull")
     public void loginShouldBeSuccessfull() {
         waitForVisibility(loginObjects.lSiteMapAccout);
+        Assert.fail();
     }
 }
