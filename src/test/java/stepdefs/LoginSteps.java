@@ -5,8 +5,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 import pageObjects.LoginObjects;
 import readers.property.PropertyReader;
+import utils.Utils;
+
+import java.util.Map;
 
 public class LoginSteps extends BaseSteps{
 
@@ -21,7 +25,6 @@ public class LoginSteps extends BaseSteps{
     @When("user clicks My Account Link")
     public void userClicksMyAccountLink() {
         click(loginObjects.menuMyAccountLink);
-
     }
 
     @And("user clicks Login Link")
@@ -36,14 +39,18 @@ public class LoginSteps extends BaseSteps{
 
     @When("user fill the login form with the following data")
     public void userFillTheLoginFormWithTheFollowingData(DataTable table) {
-
+        Map<String, String> map = table.asMap();
+        sendkeys(loginObjects.loginFormUsername, map.get("username"));
+        sendkeys(loginObjects.loginFormPassword, map.get("password"));
     }
 
     @And("user clicks Login button")
     public void userClicksLoginButton() {
+        click(loginObjects.loginFormSubmitButton);
     }
 
     @Then("login should be successfull")
     public void loginShouldBeSuccessfull() {
+        waitForVisibility(loginObjects.lSiteMapAccout);
     }
 }

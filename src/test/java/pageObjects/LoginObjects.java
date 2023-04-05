@@ -1,6 +1,7 @@
 package pageObjects;
 
 import driver.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -26,5 +27,8 @@ public class LoginObjects {
 
     @FindBy(xpath = "//input[@value='Login']")
     public WebElement loginFormSubmitButton;
+
+    @FindBy(xpath = "//ul[@class='breadcrumb']//a[.='Account']")
+    public WebElement lSiteMapAccout;
 
 }

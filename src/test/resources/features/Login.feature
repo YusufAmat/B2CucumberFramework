@@ -16,7 +16,3 @@ Feature: login functionality
 
 
 
-
-
-
-
