@@ -12,7 +12,3 @@ Feature: login functionality
 
     And   user clicks Login button
     Then  login should be successfull
-
-
-
-

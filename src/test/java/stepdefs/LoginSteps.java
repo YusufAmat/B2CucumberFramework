@@ -5,11 +5,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import pageObjects.LoginObjects;
 import readers.property.PropertyReader;
 import utils.Utils;
 
+import java.util.List;
 import java.util.Map;
 
 public class LoginSteps extends BaseSteps{
@@ -42,6 +44,7 @@ public class LoginSteps extends BaseSteps{
         Map<String, String> map = table.asMap();
         sendkeys(loginObjects.loginFormUsername, map.get("username"));
         sendkeys(loginObjects.loginFormPassword, map.get("password"));
+        Assert.fail();
     }
 
     @And("user clicks Login button")
@@ -52,6 +55,21 @@ public class LoginSteps extends BaseSteps{
     @Then("login should be successfull")
     public void loginShouldBeSuccessfull() {
         waitForVisibility(loginObjects.lSiteMapAccout);
-        Assert.fail();
+    }
+
+    @When("user clicks the following links with text")
+    public void userClicksTheFollowingLinksWithText(DataTable table) {
+        String xpathOfLink = "//a[contains(., '%s')]";
+        List<String> list = table.asList();
+        for (String text : list) {
+            By locator = By.xpath(String.format(xpathOfLink, text));
+            click(locator);
+        }
+
+    }
+
+    @Then("login should be {string}")
+    public void loginShouldBe(String arg0) {
+
     }
 }
