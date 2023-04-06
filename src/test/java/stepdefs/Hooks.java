@@ -40,23 +40,3 @@ public class Hooks {
 }
 
 
-
-/*
-        scrSchot=true{
-
-            if Fail=true {
-                if (fail){
-                    scr
-                }else{
-
-                }
-            }else{
-                scr
-            }
-
-
-
-        }
-
-
- */

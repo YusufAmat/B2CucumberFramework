@@ -39,4 +39,6 @@ public class PageObjects {
     @FindBy(css = "#product-search")
     public WebElement eSearchContainer;
 
+    @FindBy(css = "div.alert.alert-success")
+    public WebElement eAlertSuccess;
 }

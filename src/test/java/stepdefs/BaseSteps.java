@@ -5,12 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class BaseSteps {
 
@@ -100,5 +97,28 @@ public class BaseSteps {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public By getXpathOfButtonOfListedProduct(String text, int index){
+        return By.xpath("//div[@class='product-thumb' and .//div[@class='caption' and .//*[contains(.,'" + text + "')]]]//button[" + index + "]");
+    }
+
+    public By getXpathOfButtonOfListedProduct(String text, String button){
+        int index = 3;
+        if (button.equalsIgnoreCase("wish")) index = 2;
+        if (button.equalsIgnoreCase("cart")) index = 1;
+
+        return By.xpath("//div[@class='product-thumb' and .//div[@class='caption' and .//*[contains(.,'" + text + "')]]]//button[" + index + "]");
+    }
+
+
+    public By getXpathOfButtonOfListedProduct(String text, Buttons button){
+        int index = button.ordinal()+1;
+        return By.xpath("//div[@class='product-thumb' and .//div[@class='caption' and .//*[contains(.,'" + text + "')]]]//button[" + index + "]");
+    }
+
+    public enum Buttons {
+        cart,
+        wish,
+        compare;
+    }
 
 }
