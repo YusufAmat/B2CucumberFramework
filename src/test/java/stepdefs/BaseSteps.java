@@ -19,6 +19,7 @@ public class BaseSteps {
     protected BaseSteps(){
         driver = Driver.getDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(100));
+        wait = Driver.getWait();
     }
 
     public void click(By locator){

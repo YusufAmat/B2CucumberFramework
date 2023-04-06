@@ -5,12 +5,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import readers.property.PropertyReader;
+
+import java.time.Duration;
 
 import static driver.DriverFactory.*;
 
 public class Driver {
     private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
+    private static ThreadLocal<WebDriverWait> waits = new ThreadLocal<>();
+
     public static WebDriver getDriver(){
         return getDriver(Browsers.chrome);
     }
@@ -34,13 +39,19 @@ public class Driver {
                     break;
             }
         }
+        waits.set(new WebDriverWait(drivers.get(), Duration.ofSeconds(10)));
         return drivers.get();
+    }
+
+    public static WebDriverWait getWait(){
+        return waits.get();
     }
 
     public static void quitDriver(){
         if (drivers.get() != null) {
             drivers.get().quit();
             drivers.set(null);
+            waits.set(null);
         }
     }
 
