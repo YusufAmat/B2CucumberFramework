@@ -3,20 +3,13 @@ Feature: wishlist functionality
 
   Background: login with true credentials
     Given user on homepage
-    When  user clicks My Account Link
-    And   user clicks Login Link
-    Then  Login page should be visible
-
-    When  user fill the login form with the following data
-      | username | deneme@deneme.com |
-      | password | deneme            |
-
-    And   user clicks Login button
+    When  user login with username "deneme@deneme.com" and password "deneme"
     Then  login should be successfull
 
 
   Scenario: wishlist TC 1
     Given user search for "imac"
+
 
 
 

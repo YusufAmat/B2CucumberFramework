@@ -1,15 +1,14 @@
 package pageObjects;
 
 import driver.Driver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginObjects {
+public class PageObjects {
 
 
-    public LoginObjects(){
+    public PageObjects(){
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
@@ -30,5 +29,14 @@ public class LoginObjects {
 
     @FindBy(xpath = "//ul[@class='breadcrumb']//a[.='Account']")
     public WebElement lSiteMapAccout;
+
+    @FindBy(css = "#search input")
+    public WebElement eSearchBoxTop;
+
+    @FindBy(css = "#search button")
+    public WebElement eSearchButtonTop;
+
+    @FindBy(css = "#product-search")
+    public WebElement eSearchContainer;
 
 }

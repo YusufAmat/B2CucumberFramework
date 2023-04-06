@@ -7,54 +7,54 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import pageObjects.LoginObjects;
+import pageObjects.PageObjects;
 import readers.property.PropertyReader;
-import utils.Utils;
 
 import java.util.List;
 import java.util.Map;
 
 public class LoginSteps extends BaseSteps{
 
-    LoginObjects loginObjects;
+    PageObjects pageObjects;
     @Given("user on homepage")
     public void userOnHomepage() {
-        loginObjects = new LoginObjects();
+        pageObjects = new PageObjects();
         String url = PropertyReader.read().get("url");
         driver.get(url);
+
     }
 
     @When("user clicks My Account Link")
     public void userClicksMyAccountLink() {
-        click(loginObjects.menuMyAccountLink);
+        click(pageObjects.menuMyAccountLink);
     }
 
     @And("user clicks Login Link")
     public void userClicksLoginLink() {
-        click(loginObjects.menuLoginLink);
+        click(pageObjects.menuLoginLink);
     }
 
     @Then("Login page should be visible")
     public void loginPageShouldBeVisible() {
-        waitForVisibility(loginObjects.loginFormUsername);
+        waitForVisibility(pageObjects.loginFormUsername);
     }
 
     @When("user fill the login form with the following data")
     public void userFillTheLoginFormWithTheFollowingData(DataTable table) {
         Map<String, String> map = table.asMap();
-        sendkeys(loginObjects.loginFormUsername, map.get("username"));
-        sendkeys(loginObjects.loginFormPassword, map.get("password"));
+        sendkeys(pageObjects.loginFormUsername, map.get("username"));
+        sendkeys(pageObjects.loginFormPassword, map.get("password"));
         Assert.fail();
     }
 
     @And("user clicks Login button")
     public void userClicksLoginButton() {
-        click(loginObjects.loginFormSubmitButton);
+        click(pageObjects.loginFormSubmitButton);
     }
 
     @Then("login should be successfull")
     public void loginShouldBeSuccessfull() {
-        waitForVisibility(loginObjects.lSiteMapAccout);
+        waitForVisibility(pageObjects.lSiteMapAccout);
     }
 
     @When("user clicks the following links with text")
@@ -70,6 +70,17 @@ public class LoginSteps extends BaseSteps{
 
     @Then("login should be {string}")
     public void loginShouldBe(String arg0) {
+
+    }
+
+    @When("user login with username {string} and password {string}")
+    public void userLoginWithUsernameAndPassword(String username, String password) {
+        click(pageObjects.menuMyAccountLink);
+        click(pageObjects.menuLoginLink);
+        waitForVisibility(pageObjects.loginFormUsername);
+        sendkeys(pageObjects.loginFormUsername, username);
+        sendkeys(pageObjects.loginFormPassword, password);
+        click(pageObjects.loginFormSubmitButton);
 
     }
 }
