@@ -1,0 +1,23 @@
+{
+  "topmenu": {
+
+    "myaccount": {
+      "type": "xpath",
+      "locator": "//div[@id='top-links']//a[contains(.,'My Account')]"
+    },
+    "loginlink": {
+      "type": "xpath",
+      "locator" : "//div[@id='top-links']//a[contains(.,'Login')]"
+    }
+  },
+
+  "login": {
+    "username": {
+      "type": "id",
+      "locator": "input-email"
+    }
+  }
+
+
+
+}
