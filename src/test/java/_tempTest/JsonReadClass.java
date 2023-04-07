@@ -17,6 +17,7 @@ public class JsonReadClass {
         // json icinde key okunur, value { } ler icinde ise bu da object dir
         JSONObject myaccount = (JSONObject) object.get("loginlink");
 
+        // get
         String type = myaccount.get("type").toString();
         String locator = myaccount.get("locator").toString();
         System.out.println(getBy(type, locator));
