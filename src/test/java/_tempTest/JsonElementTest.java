@@ -16,6 +16,11 @@ public class JsonElementTest extends BaseSteps {
         driver.get(getValue("application", "url"));
         click(getBy("topmenu", "myaccount"));
         click(getBy("topmenu","loginlink"));
+        sendkeys(getBy("login", "username"), getValue("application", "username"));
+        sendkeys(getBy("login", "password"), getValue("application", "password"));
+        click(getBy("login", "submitbutton"));
+        waitForVisibility(getBy("account", "sitemapaccount"));
+        driver.quit();
     }
 
     public By getBy(String main, String sub) throws FileNotFoundException {

@@ -93,6 +93,9 @@ public class BaseSteps {
 
     }
 
+    public void waitForVisibility(By locator){
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
     public void waitForVisibility(WebElement element){
         wait.until(ExpectedConditions.visibilityOf(element));
     }
