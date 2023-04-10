@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ConfigPojo {
+public class ConfigPojo extends MyJsonPojo {
     private String url;
     private String username;
     private String password;

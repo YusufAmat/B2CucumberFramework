@@ -7,7 +7,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Config1PojoLombok {
+public class Config1PojoLombok extends MyJsonPojo {
     // lombok annotationslar kullanilarak getter, setter, toString ve error islemlerinde kolaylik saglar
     String url;
     String username;

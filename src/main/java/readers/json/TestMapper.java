@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestMapper {
 
@@ -43,4 +45,46 @@ public class TestMapper {
 
         System.out.println("config = " + config);
     }
+
+    @Test
+    public void testMapGeneral1(){
+        String file = "src/test/resources/datafiles/Config1.json";
+
+        MyJsonPojo pojo = new Config1PojoLombok();
+
+        Config1PojoLombok data = (Config1PojoLombok) getPojo(file, pojo);
+        System.out.println("data.getUrl() = " + data.getUrl());
+
+    }
+
+    @Test
+    public void testMapGeneral2(){
+        String file = "src/test/resources/datafiles/config.json";
+
+        MyJsonPojo pojo = new ConfigPojo();
+
+        ConfigPojo data = (ConfigPojo) getPojo(file, pojo);
+        System.out.println("data.getUsers().get(0).getAdress().getCity() = " + data.getUsers().get(0).getAdress().getCity());
+
+
+    }
+
+
+
+    public Object getPojo(String file, MyJsonPojo pojo){
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(new FileReader(file), pojo.getClass());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
+
+
 }
