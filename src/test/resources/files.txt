@@ -16,3 +16,32 @@ fileName.json
         "key" : "value",
         "key2" : "value"
     }
+
+
+{
+    "name":"ali"
+}
+
+
+{
+    "name":"ali",
+    "lastname":"veli"
+}
+
+{
+    "user": {
+        "name" : "ali",
+        "lastname" : "veli"
+    }
+}
+
+{
+    "user1": {
+        "name" : "ali",
+        "lastname" : "veli"
+    },
+     "user1": {
+            "name" : "ali",
+            "lastname" : "veli"
+        }
+}
