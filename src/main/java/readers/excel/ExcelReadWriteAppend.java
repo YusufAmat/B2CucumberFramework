@@ -1,14 +1,18 @@
 package readers.excel;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ExcelReadWriteAppend {
-
-    FileInputStream fileInputStream;
 
     @Test
     public void readExcel() throws IOException {
@@ -48,6 +52,42 @@ public class ExcelReadWriteAppend {
         workbook.close();
         fileInputStream.close();
 
+    }
+
+
+    @Test
+    public void writeNewExcelFile() throws IOException {
+        // ram de bir excel workbook olusturuldu
+        XSSFWorkbook workbook = new XSSFWorkbook();     // xlsx icin
+        //HSSFWorkbook workbook1 = new HSSFWorkbook();    // xls icin
+
+        // workbook'da bir sheet acildi
+        XSSFSheet sheet = workbook.createSheet("sayfam");
+        //HSSFSheet sheet1 = workbook1.createSheet("sayfam");
+
+        // sheet icine ilk (index = 0) row olusturuldu
+        Row row = sheet.createRow(0);
+
+        // row icine ilk (index=0) cell olusturuldu
+        Cell cell = row.createCell(0);
+
+        // cell'e deger atandi
+        cell.setCellValue("Guidersoft");
+
+        // olusturulacak excel dosyasinin yolu ve adi, xlsx olarak
+        String file = "src/test/resources/datafiles/ExcelNew.xlsx";
+
+        // olusturulan workbook'un diske java ile yazdirilmasi icin
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+        // apache poi, ramde olusturulan xlsx dosyasini yava araciligi ile diske yazdirir
+        workbook.write(fileOutputStream);
+
+        // workbook close edilir
+        workbook.close();
+
+        // fileoutputstream close edilir
+        fileOutputStream.close();
     }
 
 
