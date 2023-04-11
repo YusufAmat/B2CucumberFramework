@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import static utils.Utils.*;
 
 public class TestMapper {
 
@@ -68,20 +70,6 @@ public class TestMapper {
 
 
     }
-
-
-
-    public Object getPojo(String file, MyJsonPojo pojo){
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.readValue(new FileReader(file), pojo.getClass());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-
 
 
 

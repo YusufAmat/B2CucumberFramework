@@ -117,7 +117,7 @@
                 <configuration>
                     <includes>
                         <!-- ** projede herhangi bir packagede, Runner ile baslayan java dosyalari -->
-                        <include>**/Runner*.java</include>
+                        <include>**/RunnerLogin.java</include>
                     </includes>
                 </configuration>
             </plugin>

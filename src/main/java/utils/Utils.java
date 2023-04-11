@@ -1,5 +1,6 @@
 package utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import driver.Driver;
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
@@ -8,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import readers.json.MyJsonPojo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -162,5 +164,20 @@ public class Utils {
 
     }
 
+    /**
+     * bu method okunacak .json dosyasini pojo.class'a map eder
+     * @param file okunacak json file
+     * @param pojo parent'i  MyJsonPojo  olan pojo class'i
+     * @return MyJsonPojo olarak return eder, islem sirasinda sub class'a cast edilmeli
+     */
+    public static MyJsonPojo getPojo(String file, MyJsonPojo pojo){
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(new FileReader(file), pojo.getClass());
+        } catch (IOException e) {
+            //return null;
+            throw new RuntimeException(e);
+        }
+    }
 
 }
