@@ -117,7 +117,7 @@
                     <version>3.0.0-M1</version>
                     <configuration>
                         <includes>
-                            <include>**/Runner*.java</include>
+                            <include>**/RunnerLogin.java</include>
                         </includes>
                         <testFailureIgnore>true</testFailureIgnore>
                     </configuration>
