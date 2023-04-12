@@ -80,7 +80,7 @@ public class ExcelReadWriteAppend {
         // olusturulan workbook'un diske java ile yazdirilmasi icin
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
-        // apache poi, ramde olusturulan xlsx dosyasini yava araciligi ile diske yazdirir
+        // apache poi, ramde olusturulan xlsx dosyasini java araciligi ile diske yazdirir
         workbook.write(fileOutputStream);
 
         // workbook close edilir
@@ -90,5 +90,84 @@ public class ExcelReadWriteAppend {
         fileOutputStream.close();
     }
 
+
+
+
+
+
+
+
+
+
+
+    @Test
+    public void writeNewExcelFile1() throws IOException {
+        XSSFWorkbook workbook = new XSSFWorkbook();     // xlsx icin
+
+        XSSFSheet sheet = workbook.createSheet("sayfam");
+
+        Row row = sheet.createRow(0);
+        Cell cell = row.createCell(0);
+        cell.setCellValue("Adi");
+
+        cell = row.createCell(1);
+        cell.setCellValue(":");
+
+        cell = row.createCell(2);
+        cell.setCellValue("Guider");
+
+        Row row1 = sheet.createRow(1);
+        row1.createCell(0).setCellValue("Soyadi");
+        row1.createCell(1).setCellValue(":");
+        row1.createCell(2).setCellValue("Soft");
+
+        String file = "src/test/resources/datafiles/ExcelNewAdiSoyadi.xlsx";
+
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+        workbook.write(fileOutputStream);
+
+        workbook.close();
+
+        fileOutputStream.close();
+    }
+
+
+    @Test
+    public void addDataToExcelFile() throws IOException {
+        // okunacak excel dosyasi
+        String file = "src/test/resources/datafiles/ExcelB.xlsx";
+
+        // javanin dosyayi okumasi icin
+        FileInputStream fileInputStream = new FileInputStream(file);
+
+        // okunan dosya excel sayfasi olarak belirlendi
+        Workbook workbook = WorkbookFactory.create(fileInputStream);
+
+
+        Sheet sheet = workbook.getSheet("person");
+        int lastRow = sheet.getPhysicalNumberOfRows();
+
+        // son kisma bir satir eklendi
+        Row row = sheet.createRow(lastRow);
+
+        // eklenen satira hücreler ve degerleri yaziliyor
+        row.createCell(0).setCellValue("Guider");
+        row.createCell(1).setCellValue("Soft");
+
+
+        // ramdeki workbook'un dosyaya yazdirilmasi icin
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+        // workbook dosyaya yazdirilir
+        workbook.write(fileOutputStream);
+
+        // kapatma islemleri
+        workbook.close();
+        fileOutputStream.close();
+        fileInputStream.close();
+
+
+    }
 
 }
