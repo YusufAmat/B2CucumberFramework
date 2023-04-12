@@ -3,6 +3,7 @@ package utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import driver.Driver;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.*;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.openqa.selenium.By;
@@ -11,10 +12,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import readers.json.MyJsonPojo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -176,6 +174,51 @@ public class Utils {
             return mapper.readValue(new FileReader(file), pojo.getClass());
         } catch (IOException e) {
             //return null;
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    // özel bir excel dosyasinda yazili gherkin satirlarindan feature file olusturma.
+    public static void createFeatureFileFromExcel(String excelFile, String featureFile){
+        final String ENTER = "\n";
+        try {
+            FileWriter fileWriter = new FileWriter(featureFile);
+
+            // java excel'i okudu
+            FileInputStream fileInputStream = new FileInputStream(excelFile);
+
+            // Apache poi excel'i workbook olarak tanidi
+            Workbook workbook = WorkbookFactory.create(fileInputStream);
+
+            // ilk sayfa okundu
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // row sayisi alindi
+            int rowNums = sheet.getPhysicalNumberOfRows();
+
+            String featureLine = "Feature: " + sheet.getRow(1).getCell(0).toString();
+            fileWriter.write(featureLine + ENTER);
+
+            String scenarioLine = sheet.getRow(1).getCell(1).toString();
+            scenarioLine += ":";
+            scenarioLine += sheet.getRow(1).getCell(2).toString();
+
+            fileWriter.write(scenarioLine + ENTER);
+
+            for (int i = 1; i < rowNums; i++) {
+                Cell cell = sheet.getRow(i).getCell(3);
+                String str = cell == null ? "" : cell.toString();
+                fileWriter.write(str + ENTER);
+            }
+            workbook.close();
+            fileInputStream.close();
+            fileWriter.close();
+
+
+
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
