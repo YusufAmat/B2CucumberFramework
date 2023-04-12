@@ -2,22 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>B2CucumberFramework</artifactId>
+        <groupId>org.example</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>B2CucumberFramework</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>B2CucumberFrameworkYusuf</module>
-    </modules>
-    <name>Guidersoft B2 Cucumber Framework</name>
+    <artifactId>B2CucumberFrameworkYusuf</artifactId>
 
     <!-- projeye ait properties burada olur
-        dependency'lerde kullanilacak degiskenler burada belirlenebilir
-        <selenium.version>4.8.0</selenium.version> ile
-        dependency'de ${selenium.version} degiskeni ile 4.8.0 degeri alinir
-    -->
+       dependency'lerde kullanilacak degiskenler burada belirlenebilir
+       <selenium.version>4.8.0</selenium.version> ile
+       dependency'de ${selenium.version} degiskeni ile 4.8.0 degeri alinir
+   -->
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -128,17 +126,17 @@
         <plugins>
             <!-- diger uygulamalarin testleri baslatma noktasi -->
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M1</version>
-                    <configuration>
-                        <includes>
-                            <include>**/RunnerLogin.java</include>
-                        </includes>
-                        <testFailureIgnore>true</testFailureIgnore>
-                    </configuration>
-                </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <includes>
+                        <include>**/RunnerLogin.java</include>
+                    </includes>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
