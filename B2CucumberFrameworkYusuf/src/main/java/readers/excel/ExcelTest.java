@@ -60,7 +60,7 @@ public class ExcelTest {
        /* List<String> col = getColValuesOf(file, "person", 4);
         col.forEach(System.out::println);*/
 
-        System.out.println(getColValuesOf(file, "person", "department"));
+        System.out.println(getColValuesOf(file, "person", "salary"));
 
     }
 

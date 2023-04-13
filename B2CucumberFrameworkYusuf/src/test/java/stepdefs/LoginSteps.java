@@ -78,7 +78,7 @@ public class LoginSteps extends BaseSteps {
 
     @When("user clicks the following links with text")
     public void userClicksTheFollowingLinksWithText(DataTable table) {
-        String xpthOfLink ="//a[contains(., '%s')]";
+        String xpthOfLink = "//a[contains(., '%s')]";
         List<String> list = table.asList();
         for (String s : list) {
             By locator = By.xpath(String.format(xpthOfLink, s));
@@ -90,10 +90,10 @@ public class LoginSteps extends BaseSteps {
     @Then("login should be {string}")
     public void loginShouldBe(String success) {
 
-        if (success.equalsIgnoreCase("true")){
+        if (success.equalsIgnoreCase("true")) {
             waitForVisibility(pageObjects.columnRightLogoutLink);
             click(pageObjects.columnRightLogoutLink);
-        }else {
+        } else {
             waitForVisibility(pageObjects.loginFormWarningMessage);
         }
     }
@@ -106,5 +106,36 @@ public class LoginSteps extends BaseSteps {
         sendKeys(pageObjects.loginFormUserName, username);
         sendKeys(pageObjects.loginFormPassword, password);
         click(pageObjects.loginFormSubmitButton);
+    }
+
+    List<String> username;
+    List<String> password;
+    List<String> login;
+
+    @When("user try to login with credential given in excel file name as {string}")
+    public void userTryToLoginWithCredentialGivenInExcelFileNameAs(String fileName) {
+        String file = "src/test/resources/datafiles/" + fileName;
+        click(pageObjects.menuMyAccountLink);
+        click(pageObjects.menuLoginLink);
+        username = getColValuesOf(file, "Sheet1", 1);
+        password = getColValuesOf(file, "Sheet1", 2);
+        login = getColValuesOf(file, "Sheet1", 3);
+
+    }
+
+    @Then("login should be as in excel file")
+    public void loginShouldBeAsInExcelFile() {
+        for (int i = 0; i < username.size(); i++) {
+            sendKeys(pageObjects.loginFormUserName, username.get(i));
+            sendKeys(pageObjects.loginFormPassword, password.get(i));
+            click(pageObjects.loginFormSubmitButton);
+            if (login.get(i).equalsIgnoreCase("true")) {
+                waitForVisibility(pageObjects.columnRightLogoutLink);
+                click(pageObjects.columnRightLogoutLink);
+                driver.navigate().to("https://opencart.abstracta.us/index.php?route=account/login");
+            }else{
+                waitForVisibility(pageObjects.loginFormWarningMessage);
+            }
+        }
     }
 }

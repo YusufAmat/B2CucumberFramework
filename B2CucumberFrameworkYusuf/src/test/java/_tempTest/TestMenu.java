@@ -1,6 +1,5 @@
 package _tempTest;
 
-import _temp.BaseClass;
 import driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -51,8 +50,8 @@ public class TestMenu extends BaseSteps {
         FOOTER_MENU.click("Newsletter");
 
         TOP_MENU.click("My Account", "Login");
-        sendkeys(By.id("input-email"),"deneme@deneme.com");
-        sendkeys(By.id("input-password"),"deneme");
+        sendKeys(By.id("input-email"),"deneme@deneme.com");
+        sendKeys(By.id("input-password"),"deneme");
         click(By.cssSelector("input[type='submit']"));
         MYACCOUNT_MENU.click("Edit Account");
         RIGHT_MENU.click("My Account");
