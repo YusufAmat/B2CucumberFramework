@@ -1,6 +1,8 @@
 package readers.json;
 
-public class Config1Pojo extends MyJsonPojo{
+import readers.MyPojo;
+
+public class Config1Pojo extends MyPojo {
     // pojo getter ve setter'i olan en basit java classlaridir
     // Plain Old Java Objects
 
