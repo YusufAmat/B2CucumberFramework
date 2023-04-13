@@ -144,7 +144,6 @@ public class ExcelReadWriteAppend {
         // okunan dosya excel sayfasi olarak belirlendi
         Workbook workbook = WorkbookFactory.create(fileInputStream);
 
-
         Sheet sheet = workbook.getSheet("person");
         int lastRow = sheet.getPhysicalNumberOfRows();
 
@@ -154,7 +153,6 @@ public class ExcelReadWriteAppend {
         // eklenen satira hücreler ve degerleri yaziliyor
         row.createCell(0).setCellValue("Guider");
         row.createCell(1).setCellValue("Soft");
-
 
         // ramdeki workbook'un dosyaya yazdirilmasi icin
         FileOutputStream fileOutputStream = new FileOutputStream(file);
