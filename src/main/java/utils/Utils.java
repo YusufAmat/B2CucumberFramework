@@ -1,6 +1,7 @@
 package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import driver.Driver;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.*;
@@ -10,13 +11,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
-import readers.json.MyJsonPojo;
+import readers.MyPojo;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Utils {
+
+    public static final String ENTER = "\n";
 
     /**
      * takescreenshots
@@ -90,6 +93,16 @@ public class Utils {
     }
 
     /**
+     * file exist mi
+     * @param fileWithPath file with path
+     * @return boolean
+     */
+    public static boolean isFileExist(String fileWithPath){
+        File f = new File(fileWithPath);
+        return f.exists() && !f.isDirectory();
+    }
+
+    /**
      * java sleep
      *
      * @param millis milliseconds
@@ -147,6 +160,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Elements.json dosya formatinda kayitli veri okur
+     * @param main ana baslik
+     * @param key alt baslik
+     * @return
+     */
     public static String getValue(String main, String key) {
         try {
             String jsonFile = "src/test/resources/datafiles/Elements.json";
@@ -168,10 +187,20 @@ public class Utils {
      * @param pojo parent'i  MyJsonPojo  olan pojo class'i
      * @return MyJsonPojo olarak return eder, islem sirasinda sub class'a cast edilmeli
      */
-    public static MyJsonPojo getPojo(String file, MyJsonPojo pojo){
-        ObjectMapper mapper = new ObjectMapper();
+    public static MyPojo getPojo(String file, MyPojo pojo){
+        String[] arr = file.split("[.]");
+        String fileType = arr[arr.length-1].toLowerCase();
         try {
-            return mapper.readValue(new FileReader(file), pojo.getClass());
+            switch (fileType){
+                case "json":
+                    ObjectMapper mapperJson = new ObjectMapper();
+                    return mapperJson.readValue(new FileReader(file), pojo.getClass());
+                case "yaml":
+                    ObjectMapper mapperYaml = new ObjectMapper(new YAMLFactory());
+                    return mapperYaml.readValue(new FileReader(file), pojo.getClass());
+                default:
+                    return null;
+            }
         } catch (IOException e) {
             //return null;
             throw new RuntimeException(e);
@@ -179,9 +208,12 @@ public class Utils {
     }
 
 
-    // özel bir excel dosyasinda yazili gherkin satirlarindan feature file olusturma.
+    /**
+     * özel bir excel dosyasinda yazili gherkin satirlarindan feature file olusturma.
+     * @param excelFile gherkin olan excel dosyasi
+     * @param featureFile olusturulacak feature dosya adi
+     */
     public static void createFeatureFileFromExcel(String excelFile, String featureFile){
-        final String ENTER = "\n";
         try {
             FileWriter fileWriter = new FileWriter(featureFile);
 
@@ -215,12 +247,12 @@ public class Utils {
             fileInputStream.close();
             fileWriter.close();
 
-
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+
+
 
 }

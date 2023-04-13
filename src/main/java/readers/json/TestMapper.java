@@ -2,13 +2,11 @@ package readers.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.annotations.Test;
+import readers.MyPojo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 import static utils.Utils.*;
 
 public class TestMapper {
@@ -52,7 +50,7 @@ public class TestMapper {
     public void testMapGeneral1(){
         String file = "src/test/resources/datafiles/Config1.json";
 
-        MyJsonPojo pojo = new Config1PojoLombok();
+        MyPojo pojo = new Config1PojoLombok();
 
         Config1PojoLombok data = (Config1PojoLombok) getPojo(file, pojo);
         System.out.println("data.getUrl() = " + data.getUrl());
@@ -63,7 +61,7 @@ public class TestMapper {
     public void testMapGeneral2(){
         String file = "src/test/resources/datafiles/config.json";
 
-        MyJsonPojo pojo = new ConfigPojo();
+        MyPojo pojo = new ConfigPojo();
 
         ConfigPojo data = (ConfigPojo) getPojo(file, pojo);
         System.out.println("data.getUsers().get(0).getAdress().getCity() = " + data.getUsers().get(0).getAdress().getCity());
