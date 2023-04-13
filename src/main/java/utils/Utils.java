@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Utils {
 
+    // static val
     public static final String ENTER = "\n";
 
     /**
