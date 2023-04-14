@@ -41,7 +41,7 @@ public class TestMapper {
         String file = "src/test/resources/datafiles/config.json";
 
         ObjectMapper mapper = new ObjectMapper();
-        ConfigPojo config = mapper.readValue(new FileReader(file), ConfigPojo.class);
+        Config2Pojo config = mapper.readValue(new FileReader(file), Config2Pojo.class);
 
         System.out.println("config = " + config);
     }
@@ -61,10 +61,10 @@ public class TestMapper {
     public void testMapGeneral2(){
         String file = "src/test/resources/datafiles/config.json";
 
-        MyPojo pojo = new ConfigPojo();
+        MyPojo pojo = new Config2Pojo();
 
-        ConfigPojo data = (ConfigPojo) getPojo(file, pojo);
-        System.out.println("data.getUsers().get(0).getAdress().getCity() = " + data.getUsers().get(0).getAdress().getCity());
+        Config2Pojo data = (Config2Pojo) getPojo(file, pojo);
+        System.out.println("data.getUsers().get(0).getPassword() = " + data.getUsers().get(0).getPassword());
 
 
     }

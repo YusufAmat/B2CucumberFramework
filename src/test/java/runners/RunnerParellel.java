@@ -1,12 +1,11 @@
 package runners;
 
 
+import driver.Browsers;
+import driver.Driver;
 import io.cucumber.testng.*;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.xml.XmlTest;
 
 import java.util.Objects;
@@ -22,8 +21,8 @@ import java.util.Objects;
         glue = {"stepdefs", "hooks"},
         //tags = "@Wishlist", // tagi @Wishlist olan feature ya da scenariolari run eder
         plugin = {"pretty",
-                "json: test-output/cucumber-reports/cucumber.json", // cucumber json report
-                "html: test-output/cucumber-reports/cucumber.html", // cucumber html report
+                "json:test-output/cucumber-reports/cucumber.json", // cucumber json report
+                "html:test-output/cucumber-reports/cucumber.html", // cucumber html report
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"  // extent report plugin'i
         },    // özellikle rapor icin kullanilir
         dryRun = false   // true ise sadece stepdefs'lerin dogru tanimlanip tanimlanmaigini kontrol eder, run etmez
@@ -31,6 +30,11 @@ import java.util.Objects;
 )
 public class RunnerParellel extends AbstractTestNGCucumberTests{
 
+        @BeforeTest
+        @Parameters("browser")
+        public void beforeTest(@Optional("chrome") String browser){
+                Driver.getDriver(Browsers.valueOf(browser));
+        }
 }
 
 

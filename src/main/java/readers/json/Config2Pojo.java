@@ -9,12 +9,12 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ConfigPojo extends MyPojo {
+public class Config2Pojo extends MyPojo {
     private String url;
     private String username;
     private String password;
-    private boolean takescreenshot;
-    private String takescreenshotOn;
+    private List<String> types;
+    private Address address;
     private List<User> users;
 
     @Getter
@@ -25,15 +25,14 @@ public class ConfigPojo extends MyPojo {
         private boolean valid;
         private String username;
         private String password;
-        private Adress adress;
     }
 
     @Getter
     @Setter
     @ToString
-    public static class Adress{
+    public static class Address{
+        private String street;
+        private int number;
         private String city;
-        private String cadde;
-        private int numara;
     }
 }
