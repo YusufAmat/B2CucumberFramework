@@ -45,3 +45,41 @@ fileName.json
             "lastname" : "veli"
         }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.  Maven projesi
+2.  pom->dependenceies -> selenium, testng, cucumber
+3.  https://www.saucedemo.com/
+4.  Feature'lar
+    Scenario
+        Login
+            Given User on homepage
+            When user login with data
+                |username |standard_user|
+                |password |secret_sauce |
+            Then login should be successfull
+5.  Runner ile run
+6.  Parallel run
+
+
+
+
+
+
