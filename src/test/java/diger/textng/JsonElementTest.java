@@ -1,4 +1,4 @@
-package textng;
+package diger.textng;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

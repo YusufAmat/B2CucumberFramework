@@ -16,11 +16,22 @@ import static driver.DriverFactory.*;
 public class Driver {
     private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
     private static ThreadLocal<WebDriverWait> waits = new ThreadLocal<>();
+    private static ThreadLocal<Browsers> browsers = new ThreadLocal<>();
 
     public static WebDriver getDriver(){
-        return getDriver(Browsers.chrome);
+        if (browsers.get() == null)
+            browsers.set(Browsers.chrome);
+
+        return getDriver(browsers.get());
     }
+
     public static WebDriver getDriver(Browsers browser){
+        // Cucumber @After'da Driver.quitDriver(); oldugundan her senaryo farkli bir browser ile run edilebilir.
+        // Diver.quitDriver(); yapilmamis ise browser degisse de driver()==null olmadigi icin driver degismez
+
+        //if (browsers.get() == null)
+        browsers.set(browser);
+
         if (drivers.get() == null){
             switch (browser){
                 case firefox:
